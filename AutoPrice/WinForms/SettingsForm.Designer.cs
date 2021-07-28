@@ -123,12 +123,12 @@ namespace AutoPrice
             // 
             // textURL
             // 
-            this.textURL.Enabled = false;
             this.textURL.Location = new System.Drawing.Point(6, 19);
             this.textURL.Name = "textURL";
             this.textURL.Size = new System.Drawing.Size(344, 20);
             this.textURL.TabIndex = 3;
             this.toolTip1.SetToolTip(this.textURL, "See the help button to the right");
+            this.textURL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxes_KeyPress);
             // 
             // listExclude
             // 
@@ -257,12 +257,12 @@ namespace AutoPrice
             // 
             // textFilePath
             // 
-            this.textFilePath.Enabled = false;
             this.textFilePath.Location = new System.Drawing.Point(6, 19);
             this.textFilePath.Name = "textFilePath";
             this.textFilePath.Size = new System.Drawing.Size(344, 20);
             this.textFilePath.TabIndex = 3;
             this.toolTip1.SetToolTip(this.textFilePath, "See the help button to the right");
+            this.textFilePath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxes_KeyPress);
             // 
             // buttonSetPath
             // 

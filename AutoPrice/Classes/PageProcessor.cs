@@ -51,7 +51,7 @@ namespace AutoPrice
             }
             Regex_TD(trList);
         }
-
+        
         private static void Regex_TD(List<string> trList)
         {
             foreach (string str in trList)
@@ -77,9 +77,8 @@ namespace AutoPrice
                 if (response != null) { return true; }
                 else { return false; }
             }
-            catch (Exception)
+            catch (HttpListenerException)
             {
-
                 return false;
             }
         }

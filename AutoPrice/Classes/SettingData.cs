@@ -14,8 +14,7 @@ namespace AutoPrice
         public string MyBaseURL = "";
         public string ExportPath = "";
         public List<string> AlwaysSkip = new List<string>();
-        public List<SerializableKVP> NoICKVP = new List<SerializableKVP>();
-        public static Dictionary<string, string> NoICPrices = new Dictionary<string, string>();
+        public Dictionary<string, int> NoICPrices = new Dictionary<string, int>();
         public bool IncludeOutOfState = true;
         public int MaxDist = 0;
         public List<string> IncludeGrades = new List<string>();
@@ -36,18 +35,16 @@ namespace AutoPrice
                 MyBaseURL = dObj.MyBaseURL;
                 ExportPath = dObj.ExportPath;
                 AlwaysSkip = dObj.AlwaysSkip;
-                NoICKVP = dObj.NoICKVP;
                 MaxDist = dObj.MaxDist;
                 IncludeGrades = dObj.IncludeGrades;
                 ExcludeYards = dObj.ExcludeYards;
                 MinimumDataPoints = dObj.MinimumDataPoints;
-                CreateDictionary();
+                NoICPrices = dObj.NoICPrices;
             }
         }
 
         public void SaveSettings()
         {
-            SaveDictToKVP();
             using (var s = new FileStream(SettingsFilepath, FileMode.Create, FileAccess.Write))
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -55,34 +52,9 @@ namespace AutoPrice
             }
         }
 
-        private void CreateDictionary()
-        {
-            NoICPrices.Clear();
-            foreach (SerializableKVP kv in NoICKVP)
-            {
-                if (kv.index == "") { continue; }
-                NoICPrices.Add(kv.index, kv.value);
-            }
-        }
-
-        private void SaveDictToKVP()
-        {
-            NoICKVP.Clear();
-            foreach (KeyValuePair<string, string> k in NoICPrices)
-            {
-                var kvp = new SerializableKVP();
-                kvp.Set(k.Key, k.Value);
-                NoICKVP.Add(kvp);
-            }
-        }
-
-        public void UpdateDictionary()
-        {
-            CreateDictionary();
-        }
-
         public Part Check(Part p)
         {
+            if (p.ProjectedPrice < 0) { p.ProjectedPrice = 0; }
             if (Main.settings.AlwaysSkip.Contains(p.Name))
             {
                 p.ProjectedPrice = 0;
@@ -92,7 +64,7 @@ namespace AutoPrice
             if (NoICPrices.ContainsKey(p.Name) && string.IsNullOrEmpty(p.IC))
             {
                 p.Skip = false;
-                p.ProjectedPrice = int.Parse(NoICPrices[p.Name]);
+                p.ProjectedPrice = NoICPrices[p.Name];
                 return p;
             }
             if (p.IncludedItems.Count < Main.settings.MinimumDataPoints)
@@ -129,13 +101,13 @@ namespace AutoPrice
             var b = int.TryParse(p.Distance, out d);
             if (!b) { return false; }
             if (d > Main.settings.MaxDist) { return false; }
-            return true; //untested
+            return true;
         }
 
         private bool CheckGrade(PageItem p)
         {
             if (Main.settings.IncludeGrades.Contains(p.Grade)) { return true; }
-            else { return false; } //untested
+            else { return false; }
         }
     }
 }

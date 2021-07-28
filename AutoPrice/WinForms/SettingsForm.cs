@@ -67,10 +67,9 @@ namespace AutoPrice
             {
                 listExYards.Items.Add(i);
             }
-            foreach (SerializableKVP kvp in EditedSettings.NoICKVP)
+            foreach (KeyValuePair<string, int> kvp in EditedSettings.NoICPrices)
             {
-                if (string.IsNullOrEmpty(kvp.index)) { continue; }
-                var nlv = new ListViewItem(new string[] { kvp.index, kvp.value });
+                var nlv = new ListViewItem(new string[] { kvp.Key, kvp.Value.ToString() });
                 listMin.Items.Add(nlv);
             }
             if (EditedSettings.IncludeGrades.Contains("A")) { cA.Checked = true; }
@@ -123,7 +122,7 @@ namespace AutoPrice
         private void bminDelete_Click(object sender, EventArgs e)
         {
             var i = listMin.SelectedIndices[0];
-            EditedSettings.NoICKVP.RemoveAt(i);
+            EditedSettings.NoICPrices.Remove(listMin.Items[i].Text);
             bminDelete.Enabled = false;
             UpdateFields();
         }
@@ -142,9 +141,11 @@ namespace AutoPrice
             var af = new AddSettingForm(true);
             af.ShowDialog();
             if (!af.Valid) { return; }
-            var k = new SerializableKVP();
-            k.Set(af.Prop1, af.Prop2);
-            EditedSettings.NoICKVP.Add(k);
+            int p;
+            if (int.TryParse(af.Prop2, out p))
+            {
+                EditedSettings.NoICPrices.Add(af.Prop1, p);
+            }
             UpdateFields();
         }
 
@@ -169,7 +170,6 @@ namespace AutoPrice
             if (cB.Checked) { EditedSettings.IncludeGrades.Add("B"); }
             if (cC.Checked) { EditedSettings.IncludeGrades.Add("C"); }
             if (cX.Checked) { EditedSettings.IncludeGrades.Add("X"); }
-            EditedSettings.UpdateDictionary();
             this.Close();
         }
 
@@ -217,6 +217,11 @@ namespace AutoPrice
             {
                 beyDelete.Enabled = true;
             }
+        }
+
+        private void textBoxes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

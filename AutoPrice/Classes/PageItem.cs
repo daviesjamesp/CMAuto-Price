@@ -25,22 +25,15 @@ namespace AutoPrice
 
         public PageItem(List<string> item)
         {
-            if (item.Count == 8)
-            {
-                SetGrade(item[3]);
-                SetPrice(item[5]);
-                SetState(item[6]);
-                SetYard(item[6]);
-                SetDist(item[7]);
-            }
-            else
-            {
-                SetGrade(item[2]);
-                SetPrice(item[4]);
-                SetState(item[5]);
-                SetYard(item[5]);
-                SetDist(item[6]);
-            }
+            int hasGradeModifier = 0;
+            if (item.Count == 8) { hasGradeModifier = 1; }
+
+            SetGrade(item[2 + hasGradeModifier]);
+            SetPrice(item[4 + hasGradeModifier]);
+            SetState(item[5 + hasGradeModifier]);
+            SetYard(item[5 + hasGradeModifier]);
+            SetDist(item[6 + hasGradeModifier]);
+            
             Include = Main.settings.Check(this);
         }
 

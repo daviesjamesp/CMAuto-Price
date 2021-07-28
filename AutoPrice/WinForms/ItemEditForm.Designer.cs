@@ -53,7 +53,7 @@ namespace AutoPrice
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 49);
+            this.label1.Location = new System.Drawing.Point(10, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 0;
@@ -62,7 +62,7 @@ namespace AutoPrice
             // textIC
             // 
             this.textIC.Enabled = false;
-            this.textIC.Location = new System.Drawing.Point(13, 65);
+            this.textIC.Location = new System.Drawing.Point(13, 35);
             this.textIC.Name = "textIC";
             this.textIC.Size = new System.Drawing.Size(100, 20);
             this.textIC.TabIndex = 1;
@@ -75,20 +75,20 @@ namespace AutoPrice
             0,
             0,
             0});
-            this.numPrice.Location = new System.Drawing.Point(37, 113);
+            this.numPrice.Location = new System.Drawing.Point(38, 149);
             this.numPrice.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.numPrice.Name = "numPrice";
-            this.numPrice.Size = new System.Drawing.Size(76, 20);
+            this.numPrice.Size = new System.Drawing.Size(74, 20);
             this.numPrice.TabIndex = 2;
             this.numPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonBrowser
             // 
-            this.buttonBrowser.Location = new System.Drawing.Point(134, 113);
+            this.buttonBrowser.Location = new System.Drawing.Point(12, 179);
             this.buttonBrowser.Name = "buttonBrowser";
             this.buttonBrowser.Size = new System.Drawing.Size(100, 20);
             this.buttonBrowser.TabIndex = 3;
@@ -99,7 +99,7 @@ namespace AutoPrice
             // textGrade
             // 
             this.textGrade.Enabled = false;
-            this.textGrade.Location = new System.Drawing.Point(134, 65);
+            this.textGrade.Location = new System.Drawing.Point(13, 92);
             this.textGrade.Name = "textGrade";
             this.textGrade.Size = new System.Drawing.Size(100, 20);
             this.textGrade.TabIndex = 5;
@@ -108,7 +108,7 @@ namespace AutoPrice
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(131, 49);
+            this.label2.Location = new System.Drawing.Point(11, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 4;
@@ -117,7 +117,7 @@ namespace AutoPrice
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 97);
+            this.label3.Location = new System.Drawing.Point(11, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 6;
@@ -125,9 +125,9 @@ namespace AutoPrice
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(12, 196);
+            this.buttonSave.Location = new System.Drawing.Point(463, 225);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(244, 23);
+            this.buttonSave.Size = new System.Drawing.Size(95, 23);
             this.buttonSave.TabIndex = 8;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@ namespace AutoPrice
             // skipCheck
             // 
             this.skipCheck.AutoSize = true;
-            this.skipCheck.Location = new System.Drawing.Point(13, 115);
+            this.skipCheck.Location = new System.Drawing.Point(13, 151);
             this.skipCheck.Name = "skipCheck";
             this.skipCheck.Size = new System.Drawing.Size(15, 14);
             this.skipCheck.TabIndex = 9;
@@ -146,7 +146,7 @@ namespace AutoPrice
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listPageItems);
-            this.groupBox1.Location = new System.Drawing.Point(262, 12);
+            this.groupBox1.Location = new System.Drawing.Point(143, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(414, 207);
             this.groupBox1.TabIndex = 10;
@@ -160,6 +160,8 @@ namespace AutoPrice
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listPageItems.FullRowSelect = true;
+            this.listPageItems.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listPageItems.HideSelection = false;
             this.listPageItems.Location = new System.Drawing.Point(6, 19);
             this.listPageItems.Name = "listPageItems";
@@ -197,7 +199,7 @@ namespace AutoPrice
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(244, 178);
+            this.groupBox2.Size = new System.Drawing.Size(126, 207);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Direct Edit";
@@ -206,7 +208,7 @@ namespace AutoPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 231);
+            this.ClientSize = new System.Drawing.Size(565, 256);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

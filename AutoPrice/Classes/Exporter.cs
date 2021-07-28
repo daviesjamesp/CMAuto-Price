@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Win32;
@@ -21,15 +19,14 @@ namespace AutoPrice
 
         public static void FormatData(VehicleDataSource vds)
         {
-            var sep = '-';
             Stock = vds.Stock;
             FormattedText = "";
             foreach (Part p in vds.Parts)
             {
                 string priceStr;
-                if (p.ProjectedPrice == 0 || p.Skip == true)
+                if (p.Skip == true)
                 {
-                    priceStr = "None";
+                    priceStr = "0";
                 }
                 else
                 {
@@ -37,11 +34,11 @@ namespace AutoPrice
                 }
                 if (FormattedText == "")
                 {
-                    FormattedText += p.Name + sep + priceStr;
+                    FormattedText += priceStr;
                 }
                 else
                 {
-                    FormattedText += '\n' + p.Name + sep + priceStr;
+                    FormattedText += '\n' + priceStr;
                 }
             }
         }
@@ -124,7 +121,7 @@ namespace AutoPrice
 
             using (StreamWriter batFile = new StreamWriter(batFileName))
             {
-                batFile.WriteLine(DependencyCheck.PythonPath + " " + DependencyCheck.PyScriptPath + " " + Application.StartupPath + "\\" + Stock + ".txt" + " " + true.ToString());
+                //batFile.WriteLine(DependencyCheck.PythonPath + " " + DependencyCheck.PyScriptPath + " " + Application.StartupPath + "\\" + Stock + ".txt" + " " + true.ToString());
             }
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd.exe", "/c " + batFileName);

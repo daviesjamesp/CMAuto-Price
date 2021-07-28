@@ -57,16 +57,18 @@ namespace AutoPrice
             // 
             // mainMenuStrip
             // 
+            this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.importToolStripMenuItem,
             this.sessionToolStripMenuItem,
             this.tryPyToolStripMenuItem});
-            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Location = new System.Drawing.Point(10, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
             this.mainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.mainMenuStrip.Size = new System.Drawing.Size(770, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(750, 30);
             this.mainMenuStrip.TabIndex = 4;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
@@ -75,7 +77,7 @@ namespace AutoPrice
             this.settingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("settingsToolStripMenuItem.Image")));
             this.settingsToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(85, 28);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
@@ -84,7 +86,7 @@ namespace AutoPrice
             // 
             this.exportToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exportToolStripMenuItem.Image")));
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(77, 28);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
@@ -93,7 +95,7 @@ namespace AutoPrice
             // 
             this.importToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importToolStripMenuItem.Image")));
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(79, 28);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
@@ -105,7 +107,7 @@ namespace AutoPrice
             this.openToolStripMenuItem});
             this.sessionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sessionToolStripMenuItem.Image")));
             this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
-            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(82, 28);
             this.sessionToolStripMenuItem.Text = "Session";
             this.sessionToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
@@ -129,7 +131,7 @@ namespace AutoPrice
             // tryPyToolStripMenuItem
             // 
             this.tryPyToolStripMenuItem.Name = "tryPyToolStripMenuItem";
-            this.tryPyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.tryPyToolStripMenuItem.Size = new System.Drawing.Size(47, 28);
             this.tryPyToolStripMenuItem.Text = "TryPy";
             this.tryPyToolStripMenuItem.Click += new System.EventHandler(this.tryPyToolStripMenuItem_Click);
             // 
@@ -155,7 +157,9 @@ namespace AutoPrice
             this.partDataGrid.AllowUserToDeleteRows = false;
             this.partDataGrid.AllowUserToResizeColumns = false;
             this.partDataGrid.AllowUserToResizeRows = false;
+            this.partDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.partDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.partDataGrid.ColumnHeadersHeight = 34;
             this.partDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.partDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cIndex,
@@ -166,35 +170,40 @@ namespace AutoPrice
             this.cIncluded,
             this.cExcluded,
             this.cNotes});
+            this.partDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.partDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.partDataGrid.Location = new System.Drawing.Point(12, 63);
+            this.partDataGrid.Location = new System.Drawing.Point(10, 30);
             this.partDataGrid.Name = "partDataGrid";
+            this.partDataGrid.ReadOnly = true;
+            this.partDataGrid.RowHeadersWidth = 62;
             this.partDataGrid.RowTemplate.ReadOnly = true;
             this.partDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.partDataGrid.Size = new System.Drawing.Size(746, 656);
+            this.partDataGrid.Size = new System.Drawing.Size(750, 650);
             this.partDataGrid.TabIndex = 5;
+            this.partDataGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.partDataGrid_CellMouseDoubleClick);
             // 
             // cIndex
             // 
             this.cIndex.HeaderText = "Index";
+            this.cIndex.MinimumWidth = 8;
             this.cIndex.Name = "cIndex";
             this.cIndex.ReadOnly = true;
             this.cIndex.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cIndex.Width = 50;
             // 
             // cPart
             // 
             this.cPart.HeaderText = "Part";
+            this.cPart.MinimumWidth = 8;
             this.cPart.Name = "cPart";
             this.cPart.ReadOnly = true;
             this.cPart.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cPart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cPart.Width = 75;
             // 
             // cInterchange
             // 
             this.cInterchange.HeaderText = "Interchange";
+            this.cInterchange.MinimumWidth = 8;
             this.cInterchange.Name = "cInterchange";
             this.cInterchange.ReadOnly = true;
             this.cInterchange.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -203,58 +212,59 @@ namespace AutoPrice
             // cGrade
             // 
             this.cGrade.HeaderText = "Grade";
+            this.cGrade.MinimumWidth = 8;
             this.cGrade.Name = "cGrade";
             this.cGrade.ReadOnly = true;
             this.cGrade.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cGrade.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cGrade.Width = 50;
             // 
             // cPrice
             // 
             this.cPrice.HeaderText = "Price";
+            this.cPrice.MinimumWidth = 8;
             this.cPrice.Name = "cPrice";
             this.cPrice.ReadOnly = true;
             this.cPrice.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cPrice.Width = 75;
             // 
             // cIncluded
             // 
             this.cIncluded.HeaderText = "Inc.";
+            this.cIncluded.MinimumWidth = 8;
             this.cIncluded.Name = "cIncluded";
             this.cIncluded.ReadOnly = true;
             this.cIncluded.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cIncluded.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cIncluded.Width = 50;
             // 
             // cExcluded
             // 
             this.cExcluded.HeaderText = "Exc.";
+            this.cExcluded.MinimumWidth = 8;
             this.cExcluded.Name = "cExcluded";
             this.cExcluded.ReadOnly = true;
             this.cExcluded.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cExcluded.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cExcluded.Width = 50;
             // 
             // cNotes
             // 
             this.cNotes.HeaderText = "Notes";
+            this.cNotes.MinimumWidth = 8;
             this.cNotes.Name = "cNotes";
             this.cNotes.ReadOnly = true;
             this.cNotes.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cNotes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.cNotes.Width = 250;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 731);
+            this.ClientSize = new System.Drawing.Size(770, 690);
             this.Controls.Add(this.partDataGrid);
             this.Controls.Add(this.mainMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "Main";
+            this.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto-Price";
             this.Load += new System.EventHandler(this.Main_Load);

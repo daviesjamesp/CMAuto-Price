@@ -35,12 +35,12 @@ namespace AutoPrice
             this.Enabled = false;
             await Task.Run(() => BuildPartList(progress));
             this.Enabled = true;
-            ShowPartList();
+            partDataGrid.DataSource = vehicleDataSource.Parts;
         }
 
         private void BuildPartList(IProgress<int> progress)
         {
-            for (int i = 0; i < 10; i++) //debug reset to vehicleDataSource.Parts.Count
+            for (int i = 0; i < 5; i++) // TODO reset to vehicleDataSource.Parts.Count
             {
                 var current = vehicleDataSource.Parts[i];
                 if (!current.Skip) { current.Build(); }
@@ -52,34 +52,13 @@ namespace AutoPrice
         private void ShowPartList()
         {
             partDataGrid.Rows.Clear();
-            for (int i = 0; i < 10; i++) //debug reset to vehicleDataSource.Parts.Count
+            for (int i = 0; i < 5; i++) // TODO reset to vehicleDataSource.Parts.Count
             {
                 var current = vehicleDataSource.Parts[i];
                 var priceStr = current.ProjectedPrice.ToString();
                 if (priceStr == "0") { priceStr = "None"; }
                 if (priceStr != "None") { priceStr = "$" + priceStr; }
-                partDataGrid.Rows.Add(new string[] { current.Index.ToString(), current.Name, current.IC, current.Grade, priceStr, current.IncludedItems.Count.ToString(), current.ExcludedItems.Count.ToString() });
             }
-        }
-
-        private void partListView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            //if (partListView.SelectedItems.Count == 0) { return; }
-            //var index = partListView.SelectedIndices[0];
-            //var editPart = vehicleDataSource.Parts[index];
-            //if (settings.AlwaysSkip.Contains(editPart.Name))
-            //{
-            //    MessageBox.Show("This part is on the \"Always Skip\" list " +
-            //                    "and cannot be edited. To include, remove " +
-            //                    "this part from the list in Settings.", "Warning",
-            //                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    partListView.Items[index].Checked = false;
-            //    return;
-            //}
-            //var itemEditForm = new ItemEditForm(editPart);
-            //itemEditForm.ShowDialog();
-            //vehicleDataSource.Parts[index] = itemEditForm.EditedPart;
-            //ShowPartList();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -176,26 +155,26 @@ namespace AutoPrice
 
         private void tryPyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var state = DependencyCheck.CheckPython();
-            if (!state)
-            {
-                MessageBox.Show("Python and the needed libraries\n" +
-                                "are not installed. Please see the \n" +
-                                "Readme file for instructions","Warning",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (vehicleDataSource == null)
-            {
-                MessageBox.Show("There is no session open to write!\n" +
-                                "Import new data or open an existing \n" +
-                                "session to continue.", "Warning",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            this.Height = 65;
-            Exporter.RunPyScript(vehicleDataSource);
-            this.Height = 645;
+            var newAutomatedEntryForm = new AutomatedEntryForm("192.168.0.150","DAVID");
+            newAutomatedEntryForm.ShowDialog();
+            //try
+            //{
+            //    PythonDependencyChecker.CheckPython();
+            //}
+            //catch (NotSupportedException ex)
+            //{
+            //    var errorMessage = ex.Message + "\nPython is not installed on this PC. See the Readme file for instructions";
+            //    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+
+            //if (vehicleDataSource == null)
+            //{
+            //    MessageBox.Show("There is no session open to write!\n" +
+            //                    "Import new data or open an existing session to continue.", "Warning",
+            //                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+            //Exporter.RunPyScript(vehicleDataSource);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -233,6 +212,25 @@ namespace AutoPrice
             {
                 MessageBox.Show("File could not be saved!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void partDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (partDataGrid.SelectedRows.Count == 0) { return; }
+            var index = partDataGrid.SelectedRows[0].Index;
+            var editPart = vehicleDataSource.Parts[index];
+            if (settings.AlwaysSkip.Contains(editPart.Name))
+            {
+                MessageBox.Show("This part is on the \"Always Skip\" list " +
+                                "and cannot be edited. To include, remove " +
+                                "this part from the list in Settings.", "Warning",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            var itemEditForm = new ItemEditForm(editPart);
+            itemEditForm.ShowDialog();
+            vehicleDataSource.Parts[index] = itemEditForm.EditedPart;
+            ShowPartList();
         }
     }
 }

@@ -13,10 +13,6 @@ namespace AutoPrice
         public string Year { get; private set; }
         public string Model { get; private set; }
 
-        public VehicleDataSource()
-        {
-            //for serialization
-        }
         public VehicleDataSource(string rawText)
         {
             var lines = rawText.Split('\n');

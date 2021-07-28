@@ -71,11 +71,15 @@ namespace AutoPrice
             float priceSum = 0f;
             IncludedItems = pageItems.Where(a => a.Include).ToList();
             ExcludedItems = pageItems.Where(a => !a.Include).ToList();
-            foreach (PageItem p in IncludedItems)
+            if (IncludedItems.Count > 0)
             {
-                priceSum += p._Price;
+                priceSum = IncludedItems.Sum(a => a._Price);
+                ProjectedPrice = Round(priceSum / IncludedItems.Count);
             }
-            ProjectedPrice = Round(priceSum / IncludedItems.Count);
+            else
+            {
+                ProjectedPrice = 0;
+            }
         }
 
         private int Round(float a)
@@ -97,6 +101,19 @@ namespace AutoPrice
             url = url.Replace("%S", Side);
             url = url.Replace("%I", IC);
             Console.WriteLine(url);
+        }
+
+        public string[] ToStringArray()
+        {
+            var priceStr = (ProjectedPrice != 0) ? ProjectedPrice.ToString() : "None";
+            return new string[]
+            {
+                Index.ToString(), 
+                Name, IC, Grade, 
+                priceStr, 
+                IncludedItems.Count.ToString(), 
+                ExcludedItems.Count.ToString()
+            };
         }
     }
 }
